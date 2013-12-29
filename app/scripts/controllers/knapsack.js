@@ -8,6 +8,7 @@ angular.module('doVizApp')
                      {item: '3', weight: 3, value: 35, selected: false},
                     ];
     $scope.ksItems = demoItems;
+    $scope.ksCapacity = 9; // demo capacity
     
     $scope.gridOptions = {
       data: 'ksItems',
@@ -48,7 +49,7 @@ angular.module('doVizApp')
     };
 
     $scope.solveBaB = function() {
-      $scope.solution = solveBaB(9, $scope.ksItems);
+      $scope.solution = solveBaB($scope.ksCapacity, $scope.ksItems);
       angular.forEach($scope.solution.taken, function(value, key) {
         $scope.gridOptions.selectRow(key, value);
         $scope.ksItems[key].selected = value;
