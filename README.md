@@ -1,7 +1,7 @@
-do-viz
-======
-
 Discrete Optimization Visualization
+===================================
+
+Deployed application might be tried at [here](http://www.martyn.cz/do-viz/).
 
 Installation
 ------------
