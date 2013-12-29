@@ -27,6 +27,7 @@ angular.module('doVizApp')
 
 
     $scope.addItem = function() {
+      $scope.reset();
       if (angular.isDefined($scope.newItem) &&
           angular.isDefined($scope.newItem.value) &&
           angular.isDefined($scope.newItem.weight)) {
@@ -38,6 +39,7 @@ angular.module('doVizApp')
     };
 
     $scope.removeAll = function() {
+      $scope.reset();
       $scope.ksItems = [];
     };
 
@@ -49,6 +51,7 @@ angular.module('doVizApp')
     };
 
     $scope.solveBaB = function() {
+      $scope.reset();
       $scope.solution = solveBaB($scope.ksCapacity, $scope.ksItems);
       angular.forEach($scope.solution.taken, function(value, key) {
         $scope.gridOptions.selectRow(key, value);
