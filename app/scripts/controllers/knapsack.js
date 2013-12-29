@@ -29,7 +29,7 @@ angular.module('doVizApp')
       if (angular.isDefined($scope.newItem) &&
           angular.isDefined($scope.newItem.value) &&
           angular.isDefined($scope.newItem.weight)) {
-        $scope.ksItems.push({item: demoItems.length + 1, weight: $scope.newItem.weight, value: $scope.newItem.value, selected: false});
+        $scope.ksItems.push({item: $scope.ksItems.length + 1, weight: $scope.newItem.weight, value: $scope.newItem.value, selected: false});
       } else {
         // TODO: conditionally enable UI instead
         console.log('item not fully defined');
