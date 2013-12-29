@@ -26,11 +26,18 @@ angular.module('doVizApp')
 
 
     $scope.addItem = function() {
-      $window.alert('Not implemented yet. Only demo items available');
+      if (angular.isDefined($scope.newItem) &&
+          angular.isDefined($scope.newItem.value) &&
+          angular.isDefined($scope.newItem.weight)) {
+        $scope.ksItems.push({item: demoItems.length + 1, weight: $scope.newItem.weight, value: $scope.newItem.value, selected: false});
+      } else {
+        // TODO: conditionally enable UI instead
+        console.log('item not fully defined');
+      }
     };
 
     $scope.removeAll = function() {
-      $window.alert('Not implemented yet. Only demo items available');
+      $scope.ksItems = [];
     };
 
     $scope.reset = function() {

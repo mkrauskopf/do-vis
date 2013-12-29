@@ -8,19 +8,36 @@
 <div class="row">
 
   <div class="col-md-6">
-    <div class="gridStyle" ng-grid="gridOptions"></div>
-    <br/>
+    <div class="subcontainer">
+      <div class="gridStyle" ng-grid="gridOptions"></div>
+    </div>
 
-    <div class="btn-toolbar" role="toolbar">
-      <div class="btn-group">
+    <div class="subcontainer">
+      <form class="form-inline" role="form">
+        <div class="form-group">
+          <label class="sr-only" for="inputWeight">Weight</label>
+          <input ng-model="newItem.weight" type="number" class="form-control" id="inputWeight" placeholder="weight">
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="inputValue">Value</label>
+          <input ng-model="newItem.value" type="number" class="form-control" id="inputValue" placeholder="value">
+        </div>
         <button type="button" class="btn btn-default" ng-click="addItem()">Add item</button>
-        <button type="button" class="btn btn-default" ng-click="removeAll()">Remove all</button>
-        <button type="button" class="btn btn-default" ng-click="reset()" ng-disabled="!solution">Reset</button>
-      </div>
-      <div class="btn-group">
-        <button type="button" class="btn btn-primary" ng-click="solveBaB()">Solve</button>
+      </form>
+    </div>
+
+    <div class="subcontainer">
+      <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group">
+          <button type="button" class="btn btn-default" ng-click="removeAll()">Remove all</button>
+          <button type="button" class="btn btn-default" ng-click="reset()" ng-disabled="!solution">Reset</button>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" ng-click="solveBaB()">Solve</button>
+        </div>
       </div>
     </div>
+
   </div>
 
   <div class="col-md-6">
