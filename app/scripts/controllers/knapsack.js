@@ -3,11 +3,12 @@
 angular.module('doVisApp')
   .controller('KnapsackCtrl', function ($scope, $window) {
 
+    /** Initial items so user has something to start with. */
     var demoItems = [{item: '1', weight: 5, value: 45, selected: false},
                      {item: '2', weight: 8, value: 48, selected: false},
                      {item: '3', weight: 3, value: 35, selected: false},
                     ];
-    $scope.ksItems = demoItems;
+    $scope.ksItems = demoItems; // list of available items
     $scope.ksCapacity = 9; // demo capacity
 
 
@@ -31,13 +32,15 @@ angular.module('doVisApp')
         { field: 'value', displayName: 'Value'},
         { field: 'remove', displayName:'', cellTemplate: removeRowTemplate }
       ],
+      /** Template highlighting rows in solution set. */
       rowTemplate: '<div style="height: 100%" ng-class="{green: row.entity.selected}">' +
-                          '<div ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell ">' +
-                          '<div ng-cell></div>' +
-                          '</div>' +
-                      '</div>'
+                     '<div ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell ">' +
+                     '<div ng-cell></div>' +
+                     '</div>' +
+                   '</div>'
     };
 
+    /** Adds new item and resets the solution. */
     $scope.addItem = function() {
       $scope.reset();
       if (angular.isDefined($scope.newItem) &&
@@ -50,11 +53,13 @@ angular.module('doVisApp')
       }
     };
 
+    /** Removes all items and resets the solution. */
     $scope.removeAll = function() {
       $scope.reset();
       $scope.ksItems = [];
     };
 
+    /** Resets the solution. */
     $scope.reset = function() {
       delete $scope.solution;
       angular.forEach($scope.ksItems, function(value, key) {
@@ -62,6 +67,7 @@ angular.module('doVisApp')
       });
     };
 
+    /** Solves knapsack using current items. */
     $scope.solveBaB = function() {
       $scope.reset();
       $scope.solution = solveBaB($scope.ksCapacity, $scope.ksItems);
@@ -70,5 +76,6 @@ angular.module('doVisApp')
         $scope.ksItems[key].selected = value;
       });
     };
-  });
+  }
+);
 
