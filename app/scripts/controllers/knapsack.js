@@ -9,14 +9,27 @@ angular.module('doVisApp')
                     ];
     $scope.ksItems = demoItems;
     $scope.ksCapacity = 9; // demo capacity
-    
+
+
+    /** Called back by ng-grid when `remove' button in nb-grid is clicked. */
+    $scope.removeRow = function() {
+      var index = this.row.rowIndex;
+      $scope.gridOptions.selectItem(index, false);
+      $scope.ksItems.splice(index, 1);
+    };
+
+    /** Template used as ng-grid cell template for removing items. */
+    var removeRowTemplate = '<input type="button" value="remove" ng-click="removeRow()" />';
+
+    /** ng-grid configuration */
     $scope.gridOptions = {
       data: 'ksItems',
 	    enableRowSelection: false,
       columnDefs: [
         { field: 'item', displayName: 'Item #'},
         { field: 'weight', displayName: 'Weight'},
-        { field: 'value', displayName: 'Value'}
+        { field: 'value', displayName: 'Value'},
+        { field: 'remove', displayName:'', cellTemplate: removeRowTemplate }
       ],
       rowTemplate: '<div style="height: 100%" ng-class="{green: row.entity.selected}">' +
                           '<div ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell ">' +
@@ -24,7 +37,6 @@ angular.module('doVisApp')
                           '</div>' +
                       '</div>'
     };
-
 
     $scope.addItem = function() {
       $scope.reset();
