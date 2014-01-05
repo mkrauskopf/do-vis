@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('doVizApp', [
+angular.module('doVisApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',

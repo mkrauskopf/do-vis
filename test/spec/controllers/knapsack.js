@@ -3,7 +3,7 @@
 describe('Controller: KnapsackCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('doVizApp'));
+  beforeEach(module('doVisApp'));
 
   var KnapsackCtrl,
     scope;

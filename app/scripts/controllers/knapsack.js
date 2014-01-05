@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('doVizApp')
+angular.module('doVisApp')
   .controller('KnapsackCtrl', function ($scope, $window) {
 
     var demoItems = [{item: '1', weight: 5, value: 45, selected: false},
