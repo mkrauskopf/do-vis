@@ -9,7 +9,7 @@ angular.module('doVisApp')
                      {item: '3', weight: 3, value: 35, selected: false},
                     ];
     $scope.ksItems = demoItems; // list of available items
-    $scope.ksCapacity = 9; // demo capacity
+    $scope.ksCapacity = 10; // demo capacity
 
 
     /** Called back by ng-grid when `remove' button in nb-grid is clicked. */
