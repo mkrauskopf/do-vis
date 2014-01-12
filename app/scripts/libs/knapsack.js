@@ -11,6 +11,12 @@ function doSolve(solution, value, remainingCap, maxEstimate, taken, level, callb
       solution.taken = taken.slice();
     }
   }
+  
+  function reportNode(taken, value, cap, estimate) {
+    var id = taken.join('');
+    var node = {id: id, value: value, room: cap, estimate: estimate}
+    callback(node);
+  }
 
   /*
   console.log("Trying: " + JSON.stringify({
@@ -24,8 +30,7 @@ function doSolve(solution, value, remainingCap, maxEstimate, taken, level, callb
   */
   if (taken.length > 0) {
     var id = taken.join('');
-    var node = {id: id, value: value, room: remainingCap, estimate: maxEstimate}
-    callback(node);
+    reportNode(taken, value, remainingCap, maxEstimate);
   }
   if (maxEstimate < solution.value) {
     // console.log("skipping due to insuffient solution.value")
@@ -36,15 +41,21 @@ function doSolve(solution, value, remainingCap, maxEstimate, taken, level, callb
     return;
   }
   var item = _items[level];
-  var exceedCap = remainingCap - item.weight < 0;
-  if (exceedCap) { // capacity exceeded. Prune whole subtree under current node.
+  var nextRemainingCap = remainingCap - item.weight;
+  if (nextRemainingCap < 0) { // capacity exceeded. Prune whole subtree under current node.
+    if (taken.length > 0) {
+      taken[level] = 1;
+      reportNode(taken, '---', nextRemainingCap, '---');
+      taken.pop();
+    }
+
     taken[level] = 0;
     updateSolution(solution, value, taken);
     doSolve(solution, value, remainingCap, maxEstimate - item.value, taken, level + 1, callback);
   } else {
     // use it
     taken[level] = 1;
-    doSolve(solution, value + item.value, remainingCap - item.weight, maxEstimate, taken, level + 1, callback);
+    doSolve(solution, value + item.value, nextRemainingCap, maxEstimate, taken, level + 1, callback);
     // do not use it
     taken[level] = 0;
     doSolve(solution, value, remainingCap, maxEstimate - item.value, taken, level + 1, callback);
