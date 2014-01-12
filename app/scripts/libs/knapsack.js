@@ -23,8 +23,9 @@ function doSolve(solution, value, remainingCap, maxEstimate, taken, level, callb
   }));
   */
   if (taken.length > 0) {
-    var nodeName = taken.join('');
-    callback(nodeName);
+    var id = taken.join('');
+    var node = {id: id, value: value, room: remainingCap, estimate: maxEstimate}
+    callback(node);
   }
   if (maxEstimate < solution.value) {
     // console.log("skipping due to insuffient solution.value")

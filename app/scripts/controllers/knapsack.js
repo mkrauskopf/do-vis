@@ -112,11 +112,11 @@ angular.module('doVisApp')
           .attr('dx', 4)
           .attr('dy', 4); //padding-left and padding-top
 
-      var update = function(nodeName) {
+      var update = function(ksNode) {
         // Add a new datum to a random parent.
         //var n = ~~(Math.random() * data.length);
         //var d = {id: data.length}, parent = data[n];
-        var parentId = nodeName.slice(0, -1);
+        var parentId = ksNode.id.slice(0, -1);
         var parent;
         for (var i in data) {
           if (data[i].id === parentId) {
@@ -124,7 +124,7 @@ angular.module('doVisApp')
             break;
           }
         }
-        var currentNode = {id: nodeName};
+        var currentNode = {id: ksNode.id};
         if (parent.children) {
           parent.children.push(currentNode);
         } else {
@@ -154,7 +154,7 @@ angular.module('doVisApp')
 
         tnode.enter().append('svg:text')
               .attr('class', 'node')
-              .text(function(d) { return nodeName; })
+              .text(function(d) { return [ksNode.value, ksNode.room, ksNode.estimate].join('/'); })
               .attr('x', function(d) { return d.parent.data.x0; })
               .attr('y', function(d) { return d.parent.data.y0; })
             .transition()
